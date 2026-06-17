@@ -4,33 +4,19 @@ This folder holds the brand mark so it can be updated in one place.
 
 | File | Purpose |
 | --- | --- |
-| `RubricLogo.jsx` | Inline-SVG React component used across the site. Recolours with the theme (graphite on light, white on dark); the impact vector stays Signal Red `#E53935`. |
-| `rubric-logo.svg` | Static fixed-colour version (also copied to `/public` for the browser favicon). |
+| `rubric-logo.png` | **The official logo** — used across the whole site via `RubricLogo.jsx`. The artwork already includes the "rubric" wordmark. |
+| `RubricLogo.jsx` | React component that renders the logo at a given `size` (height in px). |
+| `rubric-logo.svg` | Earlier placeholder vector (no longer used by the site; kept for reference). |
 
-## How to swap in the OFFICIAL logo
+There's also a copy at `/public/rubric-logo.png`, used for the **browser tab icon** (favicon) — see `index.html`.
 
-You pasted the logo as an image in chat — that can't be saved automatically, so
-drop the real file in here yourself.
+## How to update the logo
 
-1. Save the official artwork into this folder, e.g. `rubric-logo.png`
-   (or, ideally, a vector `rubric-logo-official.svg`).
-2. Open `RubricLogo.jsx` and replace the inline `<svg>…</svg>` with an image:
+1. Replace **`rubric-logo.png`** in this folder with your new artwork (keep the same filename).
+2. Replace **`/public/rubric-logo.png`** too, if you want the browser tab icon updated.
+3. That's it — the navbar, hero and footer all import from `RubricLogo.jsx`, so they update automatically.
 
-   ```jsx
-   import logoUrl from './rubric-logo.png'
-
-   export default function RubricLogo({ size = 40, withWordmark = true }) {
-     return (
-       <span className="rubric-logo" aria-label="Rubric">
-         <img src={logoUrl} alt="Rubric" height={size} />
-         {withWordmark && <span className="rubric-wordmark">rubric</span>}
-       </span>
-     )
-   }
-   ```
-
-3. To also update the browser tab icon, replace `/public/rubric-logo.svg`
-   (keep the same filename, or update the `<link rel="icon">` in `index.html`).
-
-Because every part of the site imports the logo from this one component,
-updating it here updates it everywhere — navbar, footer and hero.
+> **Tip:** the current PNG has a white background, so on the dark theme it sits on
+> a white "chip". If you export a **transparent-background** PNG (or an SVG), it
+> will blend seamlessly into both themes — then you can remove the white
+> background rule for `.rubric-logo` in `src/index.css`.
