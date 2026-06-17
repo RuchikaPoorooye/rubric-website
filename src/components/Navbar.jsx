@@ -16,7 +16,7 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar-inner container">
         <a href="#top" className="navbar-brand" aria-label="Rubric home">
-          <RubricLogo size={34} />
+          <RubricLogo size={44} />
         </a>
 
         <nav className={`navbar-links ${open ? 'is-open' : ''}`}>
