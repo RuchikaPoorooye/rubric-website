@@ -1,15 +1,15 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import RubricLogo from '../assets/logo/RubricLogo.jsx'
 import ParticleField from './effects/ParticleField.jsx'
+import { company } from '../data/site.js'
 
 export default function Hero() {
   const reduce = useReducedMotion()
 
   const container = {
     hidden: {},
-    show: {
-      transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-    },
+    show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
   }
   const item = {
     hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 22 },
@@ -17,7 +17,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="top" className="hero">
+    <section className="hero">
       <ParticleField />
       <div className="hero-grid" aria-hidden="true" />
 
@@ -32,7 +32,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.p className="hero-eyebrow" variants={item}>
-          <span className="status-dot" /> Rubric Consulting · Future-ready QA
+          <span className="status-dot" /> Software Quality Engineering · Est. {company.founded}
         </motion.p>
 
         <motion.h1 className="hero-title" variants={item}>
@@ -41,24 +41,20 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p className="hero-sub" variants={item}>
-          Quality assurance, test automation and specialist technical
-          consulting — built with precision and intention so impact emerges from
-          structure and execution.
+          A South African software quality firm with {company.engineers} quality
+          engineers — delivering testing, automation and specialist consulting so
+          impact emerges from structure and execution.
         </motion.p>
 
         <motion.div className="hero-cta" variants={item}>
-          <a href="#services" className="btn btn-primary">
+          <Link to="/services" className="btn btn-primary">
             Explore our services
-          </a>
-          <a href="#contact" className="btn btn-ghost">
+          </Link>
+          <Link to="/contact" className="btn btn-ghost">
             Get in touch
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
-
-      <a href="#about" className="hero-scroll" aria-label="Scroll to content">
-        <span className="hero-scroll-dot" />
-      </a>
     </section>
   )
 }

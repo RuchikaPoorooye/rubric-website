@@ -1,32 +1,26 @@
-import Navbar from './components/Navbar.jsx'
-import Hero from './components/Hero.jsx'
-import About from './components/About.jsx'
-import Services from './components/Services.jsx'
-import Stats from './components/Stats.jsx'
-import Departments from './components/Departments.jsx'
-import BrandStatement from './components/BrandStatement.jsx'
-import Contact from './components/Contact.jsx'
-import Footer from './components/Footer.jsx'
-import ScrollProgress from './components/effects/ScrollProgress.jsx'
-import GlowCursor from './components/effects/GlowCursor.jsx'
+import { Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout.jsx'
+import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
+import Services from './pages/Services.jsx'
+import Partners from './pages/Partners.jsx'
+import Careers from './pages/Careers.jsx'
+import Contact from './pages/Contact.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 function App() {
   return (
-    <>
-      <ScrollProgress />
-      <GlowCursor />
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Stats />
-        <Departments />
-        <BrandStatement />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/partners" element={<Partners />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   )
 }
 
