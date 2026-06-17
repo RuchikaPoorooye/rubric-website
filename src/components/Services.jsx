@@ -1,3 +1,6 @@
+import Reveal from './effects/Reveal.jsx'
+import TiltCard from './effects/TiltCard.jsx'
+
 const services = [
   {
     title: 'IT QA & Testing Assessments',
@@ -41,19 +44,23 @@ export default function Services() {
   return (
     <section id="services" className="section section-alt">
       <div className="container">
-        <p className="section-eyebrow">Our services</p>
-        <h2 className="section-title">What we do</h2>
-        <p className="section-lead">
-          A full spectrum of quality assurance and technical services to help
-          you deliver better software, faster.
-        </p>
+        <Reveal>
+          <p className="section-eyebrow">Our services</p>
+          <h2 className="section-title">What we do</h2>
+          <p className="section-lead">
+            A full spectrum of quality assurance and technical services to help
+            you deliver better software, faster.
+          </p>
+        </Reveal>
 
         <div className="services-grid">
-          {services.map((s) => (
-            <article key={s.title} className="service-card">
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </article>
+          {services.map((s, i) => (
+            <Reveal key={s.title} delay={(i % 3) * 0.08}>
+              <TiltCard className="service-card">
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,3 +1,5 @@
+import Reveal from './effects/Reveal.jsx'
+
 const principles = [
   {
     title: 'Architectural',
@@ -21,23 +23,25 @@ export default function About() {
   return (
     <section id="about" className="section">
       <div className="container">
-        <p className="section-eyebrow">About us</p>
-        <h2 className="section-title">
-          The connection between structure and execution
-        </h2>
-        <p className="section-lead">
-          Rubric Consulting focuses on quality assurance and testing services,
-          with technical specialists providing support across test automation,
-          mobile applications, performance and security. We help teams deliver
-          measurable impact across the software lifecycle.
-        </p>
+        <Reveal>
+          <p className="section-eyebrow">About us</p>
+          <h2 className="section-title">
+            The connection between structure and execution
+          </h2>
+          <p className="section-lead">
+            Rubric Consulting focuses on quality assurance and testing services,
+            with technical specialists providing support across test automation,
+            mobile applications, performance and security. We help teams deliver
+            measurable impact across the software lifecycle.
+          </p>
+        </Reveal>
 
         <div className="principles-grid">
-          {principles.map((p) => (
-            <div key={p.title} className="principle-card">
+          {principles.map((p, i) => (
+            <Reveal key={p.title} delay={i * 0.08} className="principle-card">
               <h3>{p.title}</h3>
               <p>{p.body}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
