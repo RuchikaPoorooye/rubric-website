@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-inner">
-        <RubricLogo size={30} />
+        <RubricLogo size={40} />
         <p className="footer-tagline">
           Helping our customers deliver better software, faster.
         </p>

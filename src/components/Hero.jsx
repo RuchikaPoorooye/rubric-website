@@ -5,7 +5,7 @@ export default function Hero() {
     <section id="top" className="hero">
       <div className="container hero-inner">
         <div className="hero-mark">
-          <RubricLogo size={96} withWordmark={false} />
+          <RubricLogo size={130} />
         </div>
         <p className="hero-eyebrow">Rubric Consulting</p>
         <h1 className="hero-title">

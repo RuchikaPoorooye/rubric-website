@@ -120,18 +120,20 @@ h3 {
   color: var(--accent);
 }
 
-/* ---------- Logo + wordmark ---------- */
+/* ---------- Logo ----------
+   The official logo PNG has a white background, so it sits on a white
+   "chip" — invisible on the light theme, a clean tile on the dark theme. */
 .rubric-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 10px;
+  line-height: 0;
 }
-.rubric-wordmark {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.5rem;
-  letter-spacing: 0.14em;
-  color: var(--heading);
+.rubric-logo img {
+  display: block;
+  width: auto;
 }
 
 /* ---------- Navbar ---------- */
