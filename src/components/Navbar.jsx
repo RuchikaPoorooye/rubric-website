@@ -1,29 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 import RubricLogo from '../assets/logo/RubricLogo.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
-
-const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Departments', href: '#departments' },
-  { label: 'Contact', href: '#contact' },
-]
+import { nav } from '../data/site.js'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <header className="navbar">
+    <header className={`navbar ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="navbar-inner container">
-        <a href="#top" className="navbar-brand" aria-label="Rubric home">
+        <Link to="/" className="navbar-brand" aria-label="Rubric home">
           <RubricLogo size={44} />
-        </a>
+        </Link>
 
         <nav className={`navbar-links ${open ? 'is-open' : ''}`}>
-          {links.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+          {nav.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.to === '/'}
+              className={({ isActive }) => (isActive ? 'is-active' : undefined)}
+              onClick={() => setOpen(false)}
+            >
               {link.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
