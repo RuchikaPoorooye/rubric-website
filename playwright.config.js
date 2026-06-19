@@ -29,7 +29,7 @@ export default defineConfig({
 
   use: {
     baseURL: 'http://localhost:5173',
-    headless: isCI, // headed locally, headless on CI
+    headless: isCI || process.env.HEADLESS === 'true', // headed locally; headless on CI or via HEADLESS=true
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
