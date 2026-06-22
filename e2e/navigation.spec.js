@@ -43,4 +43,22 @@ test.describe('US-1 Global Navigation [PLAI-139]', () => {
     await page.getByRole('link', { name: /back to home/i }).click()
     await expect(page).toHaveURL('/')
   })
+
+  // PLAI-158 — header switches to compact on scroll
+  test('header becomes compact on scroll', async ({ page }) => {
+    await page.goto('/')
+    await expect(page.locator('.navbar')).not.toHaveClass(/is-scrolled/)
+    await page.evaluate(() => window.scrollTo(0, 600))
+    await expect(page.locator('.navbar')).toHaveClass(/is-scrolled/)
+  })
+
+  // PLAI-160 — menu items are keyboard-operable
+  test('navigation works with the keyboard', async ({ page }) => {
+    await page.goto('/')
+    const about = page.getByRole('banner').getByRole('link', { name: 'About', exact: true })
+    await about.focus()
+    await expect(about).toBeFocused()
+    await page.keyboard.press('Enter')
+    await expect(page).toHaveURL('/about')
+  })
 })

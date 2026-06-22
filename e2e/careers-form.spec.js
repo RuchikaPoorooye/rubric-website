@@ -57,4 +57,32 @@ test.describe('US-6 Careers Application [PLAI-144]', () => {
     await page.getByRole('button', { name: /submit application/i }).click()
     await expect(page.getByText(/thanks for your interest/i)).toBeVisible()
   })
+
+  // PLAI-171 — invalid email is rejected
+  test('rejects an invalid email format', async ({ page }) => {
+    await fillBasics(page)
+    await page.getByLabel('Email').fill('not-an-email')
+    await page.locator('input[type="file"]').setInputFiles(validCv)
+    await page.getByRole('button', { name: /submit application/i }).click()
+    const emailValid = await page.getByLabel('Email').evaluate((el) => el.checkValidity())
+    expect(emailValid).toBe(false)
+    await expect(page.getByText(/thanks for your interest/i)).toHaveCount(0)
+  })
+
+  // PLAI-172 — script-like input is handled safely (no execution)
+  test('handles script-like input safely', async ({ page }) => {
+    let dialogFired = false
+    page.on('dialog', (d) => {
+      dialogFired = true
+      d.dismiss()
+    })
+    await page.getByLabel('Position of interest').fill('<script>alert(1)</script>')
+    await page.getByLabel('First name').fill('Ada')
+    await page.getByLabel('Surname').fill('Lovelace')
+    await page.getByLabel('Email').fill('ada@example.com')
+    await page.locator('input[type="file"]').setInputFiles(validCv)
+    await page.getByRole('button', { name: /submit application/i }).click()
+    await expect(page.getByText(/thanks for your interest/i)).toBeVisible()
+    expect(dialogFired).toBe(false)
+  })
 })

@@ -43,6 +43,8 @@ report can be traced straight back to the story.
 
 ## Result
 
-**29 passing · 4 skipped** (the search `fixme` placeholders). Reports:
+**38 passing · 4 skipped** (the search `fixme` placeholders). Mapped to Xray
+tests PLAI-148–180 under Epic PLAI-138 (only the theme-contrast check, PLAI-177,
+is left as a manual/visual verification). Reports:
 `playwright-report/index.html` (HTML) and `playwright-report/results.xml`
 (JUnit — importable into Xray).

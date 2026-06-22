@@ -36,4 +36,19 @@ test.describe('US-7 Contact Enquiry [PLAI-145]', () => {
     await page.getByRole('button', { name: /send message/i }).click()
     await expect(page.getByText(/your message has been captured/i)).toBeVisible()
   })
+
+  // PLAI-173 — company details are shown on the Contact page
+  test('shows company details', async ({ page }) => {
+    const details = page.locator('.contact-list')
+    await expect(details.getByText(/Rubric Consulting \(Pty\) Ltd/i)).toBeVisible()
+    await expect(details.getByText(/Fourways/i)).toBeVisible()
+    await expect(details.getByText(/2007/)).toBeVisible()
+  })
+
+  // PLAI-176 — website link opens safely in a new tab
+  test('website link opens in a new tab safely', async ({ page }) => {
+    const link = page.locator('.contact-list').getByRole('link', { name: /rubric\.co\.za/i })
+    await expect(link).toHaveAttribute('target', '_blank')
+    await expect(link).toHaveAttribute('rel', /noreferrer/)
+  })
 })
