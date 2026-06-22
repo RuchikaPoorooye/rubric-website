@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test'
 
-// FR-04 Home page & tiles
+// US-2 Home Page Overview — Epic PLAI-138, Story PLAI-140
 // E2E: the hero renders, both CTAs route correctly, and the home page shows the
 // services preview, the impact stats, and the five brand departments.
 
-test.describe('FR-04 Home page', () => {
+test.describe('US-2 Home Page Overview [PLAI-140]', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
   })

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-// FR-01 Information Architecture & FR-02 Navigation
+// US-1 Global Navigation — Epic PLAI-138, Story PLAI-139
 // E2E: a user can reach every page from the top navigation, the active link
 // is highlighted, the logo returns home, and unknown URLs show a 404.
 
@@ -12,7 +12,7 @@ const pages = [
   { link: 'Contact', path: '/contact', heading: /build quality together/i },
 ]
 
-test.describe('FR-02 Navigation', () => {
+test.describe('US-1 Global Navigation [PLAI-139]', () => {
   test('navigates to every page from the header menu', async ({ page }) => {
     await page.goto('/')
     const header = page.getByRole('banner')

@@ -1,44 +1,48 @@
 # Rubric Website — E2E Automation
 
-End-to-end tests built with **Playwright**, covering all user-facing flows of the
-generated Rubric website and mapped to the functional requirements (FR) in the
-**Rubric BRD v2**.
+End-to-end tests built with **Playwright**, mapped to the user stories under
+**Epic [PLAI-138](https://rubricmu.atlassian.net/browse/PLAI-138)** —
+*"Rubric Website (futuristic-ui) – User Stories & Tests"*.
 
 ## Running
 
 ```bash
 npm install
 npx playwright install chromium   # one-time browser download
-npm run test:e2e                  # run all flows (headless)
+npm run test:e2e                  # headed (visible browser) + reports
+npm run test:e2e:headless         # headless / CI run
 npm run test:e2e:ui               # interactive UI mode
 npm run test:e2e:report           # open the last HTML report
 ```
 
 The config starts (or reuses) the Vite dev server at `http://localhost:5173`.
 
-## Coverage map (BRD → spec)
+## Traceability — User Story (PLAI-138) → spec
 
-| BRD ref | Flow | Spec file | Status |
+| Story | Title | Spec file | Status |
 | --- | --- | --- | --- |
-| FR-01 / FR-02 | Information architecture & navigation | `navigation.spec.js` | ✅ automated |
-| FR-04 | Home page, hero, CTAs, tiles | `home.spec.js` | ✅ automated |
-| FR-05 | About — vision/mission/values | `content-pages.spec.js` | ✅ automated |
-| FR-06 | Services — nine services | `content-pages.spec.js` | ✅ automated |
-| FR-08 | Partners — Atlassian suite | `content-pages.spec.js` | ✅ automated |
-| FR-09 | Contact form (required, email, success) | `contact-form.spec.js` | ✅ automated |
-| FR-10 | Careers application form | `careers-form.spec.js` | ✅ automated (CV upload `fixme`) |
-| — | Dark/light theme toggle + persistence | `theme.spec.js` | ✅ automated |
-| — | Mobile burger navigation | `responsive.spec.js` | ✅ automated |
-| FR-03 | Site search | `search.spec.js` | ⚠️ documented gap (`fixme`) |
+| **US-1** · PLAI-139 | Global Navigation | `navigation.spec.js` | ✅ automated |
+| **US-2** · PLAI-140 | Home Page Overview | `home.spec.js` | ✅ automated |
+| **US-3** · PLAI-141 | Services Listing | `content-pages.spec.js` | ✅ automated |
+| **US-4** · PLAI-142 | About the Company | `content-pages.spec.js` | ✅ automated |
+| **US-5** · PLAI-143 | Partner (Atlassian) Information | `content-pages.spec.js` | ✅ automated |
+| **US-6** · PLAI-144 | Careers Application (incl. CV upload) | `careers-form.spec.js` | ✅ automated |
+| **US-7** · PLAI-145 | Contact Enquiry | `contact-form.spec.js` | ✅ automated |
+| **US-8** · PLAI-146 | Theme Toggle (Dark / Light) | `theme.spec.js` | ✅ automated |
+| **US-9** · PLAI-147 | Visual & Interaction Effects | `effects.spec.js` | ✅ automated |
 
-## Known divergences from the BRD
+Each test's `describe` block is named with its **US-x [PLAI-xxx]** key so a run
+report can be traced straight back to the story.
 
-The BRD describes the **live WordPress site** (rubric.co.za). The generated React
-site is a streamlined marketing build, so two BRD flows are intentionally marked
-as `fixme` (visible in the report, not silently skipped):
+## Supplementary specs (beyond the epic)
 
-1. **FR-03 Site search** — no search exists in the generated site.
-2. **FR-10 CV upload** — the careers form has no file-upload field; the rest of
-   the application flow is fully automated.
+| Spec | Purpose |
+| --- | --- |
+| `responsive.spec.js` | Mobile burger navigation (the epic notes mobile as a gap; this verifies the menu that exists). |
+| `search.spec.js` | Site search — not part of the futuristic-ui scope; kept as a documented `fixme` placeholder. |
 
-These become active tests as soon as the corresponding features are built.
+## Result
+
+**29 passing · 4 skipped** (the search `fixme` placeholders). Reports:
+`playwright-report/index.html` (HTML) and `playwright-report/results.xml`
+(JUnit — importable into Xray).

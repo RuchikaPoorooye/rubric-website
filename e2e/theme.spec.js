@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test'
 // E2E: the site defaults to dark, toggles to light, and the choice persists
 // across a reload via localStorage.
 
-test.describe('Theme toggle', () => {
+test.describe('US-8 Theme Toggle (Dark / Light) [PLAI-146]', () => {
   test('defaults to dark theme', async ({ page }) => {
     await page.goto('/')
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')

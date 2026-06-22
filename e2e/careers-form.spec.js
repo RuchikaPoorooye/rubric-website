@@ -17,7 +17,7 @@ async function fillBasics(page) {
   await page.getByLabel('Email').fill('ada@example.com')
 }
 
-test.describe('FR-10 Careers form', () => {
+test.describe('US-6 Careers Application [PLAI-144]', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/careers')
   })

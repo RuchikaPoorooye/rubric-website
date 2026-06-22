@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test'
 // E2E: required-field validation, email-format validation, and a successful
 // submission showing the confirmation message.
 
-test.describe('FR-09 Contact form', () => {
+test.describe('US-7 Contact Enquiry [PLAI-145]', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/contact')
   })
